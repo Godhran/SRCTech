@@ -1,0 +1,204 @@
+#LeftArm {
+    -webkit-animation: MoveLeftArm 5s ease infinite;
+    -moz-animation: MoveLeftArm 5s ease infinite;
+    animation: MoveLeftArm 5s ease infinite;
+}
+
+#RightArm {
+    -webkit-animation: MoveRightArm 5s ease infinite;
+    -moz-animation: MoveRightArm 5s ease infinite;
+    animation: MoveRightArm 5s ease infinite;
+}
+
+#FullStop {
+    -webkit-animation: MoveFullStop 5s ease infinite;
+    -moz-animation: MoveFullStop 5s ease infinite;
+    animation: MoveFullStop 5s ease infinite;
+}
+
+@-webkit-keyframes MoveLeftArm {
+    0% {
+        transform: translateX(-80px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(-80px);
+        transform-origin: 50% 50%;
+    }
+}
+
+@-moz-keyframes MoveLeftArm {
+    0% {
+        transform: translateX(-80px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(-80px);
+        transform-origin: 50% 50%;
+    }
+}
+
+@keyframes MoveLeftArm {
+    0% {
+        transform: translateX(-80px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(-80px);
+        transform-origin: 50% 50%;
+    }
+}
+
+@-webkit-keyframes MoveRightArm {
+    0% {
+        transform: translateX(80px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(80px);
+        transform-origin: 50% 50%;
+    }
+}
+
+@-moz-keyframes MoveRightArm {
+    0% {
+        transform: translateX(80px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(80px);
+        transform-origin: 50% 50%;
+    }
+}
+
+@keyframes MoveRightArm {
+    0% {
+        transform: translateX(80px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(80px);
+        transform-origin: 50% 50%;
+    }
+}
+
+@-webkit-keyframes MoveFullStop {
+    0% {
+        transform: translateX(-180px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(-180px);
+        transform-origin: 50% 50%;
+    }
+}
+
+@-moz-keyframes MoveFullStop {
+    0% {
+        transform: translateX(-180px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(-180px);
+        transform-origin: 50% 50%;
+    }
+}
+
+@keyframes MoveFullStop {
+    0% {
+        transform: translateX(-210px);
+        transform-origin: 50% 50%;
+    }
+    25% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    75% {
+        transform: translateX(0px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(-210px);
+        transform-origin: 50% 50%;
+    }
+}
+
+
+/* @keyframes MoveLeftArm {
+    0% {
+        transform: translateX(-500px);
+        transform-origin: 50% 50%;
+    }
+    50% {
+        transform: translateX(500px);
+        transform-origin: 50% 50%;
+    }
+    100% {
+        transform: translateX(-500px);
+        transform-origin: 50% 50%;
+    }
+} */
