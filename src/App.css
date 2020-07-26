@@ -25,10 +25,24 @@ body,
     background-color: white;
     padding: 2em;
     border-radius: 1em;
+    text-align: center;
+}
+
+.reviewDataForm {
+    text-align: left;
 }
 
 .pageControlButtons {
     margin-top: 2em;
+}
+
+.drawLineSuccess {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    animation: dashSuccess 1.5s linear forwards;
 }
 
 
@@ -79,5 +93,11 @@ h3 {
     }
     100% {
         background-position: 50% 0%
+    }
+}
+
+@keyframes dashSuccess {
+    to {
+        stroke-dashoffset: 0;
     }
 }

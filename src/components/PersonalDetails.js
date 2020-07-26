@@ -66,7 +66,8 @@ class PersonalDetails extends React.Component {
             allDataOk=false;
         }
 
-        if(data.dateOfBirth.length>0){
+        console.log(data.dateOfBirth);
+        if(data.dateOfBirth.length>0&&data.dateOfBirth.substr(0,4)<=new Date().getFullYear()){
             tempErrorDateOfBirth="";                  
         }else{
             tempErrorDateOfBirth="Select a date of birth";     
@@ -141,50 +142,56 @@ class PersonalDetails extends React.Component {
 
     updatePostCode= field => e =>{
         e.preventDefault();
-        let tempPostCode = e.target.value.replace(/ /g,"");
-        this.setState({[field]:e.target.value});
-        if(tempPostCode.length===7){
-            this.getAddressFromPostCode(tempPostCode)
-        }
+        let tempPostCode = e.target.value.replace(/ /g,"").toLocaleUpperCase();
+        this.setState({[field]:tempPostCode});
+        // if(tempPostCode.length=7){
+        //     this.getAddressFromPostCode(tempPostCode)
+        // }
     }
     
     getAddressFromPostCode = async(postCode) => {
-        this.removeBlanks(this.state.addressOptions)
 
-        const API_KEY = 'ah nah nah nah';
-    
-        const api_call = await fetch(
-          `https://api.getAddress.io/find/${postCode}?api-key=${API_KEY}`
-        );
-    
-        const data = await api_call.json();
+                //Only 20 calls a day with this free API
+                const API_KEY = 'As2muV_tS0WVjtn7bqgdaQ27393';
+            
+                const api_call = await fetch(
+                `https://api.getAddress.io/find/${postCode}?api-key=${API_KEY}`
+                );
+            
+                const data = await api_call.json();
 
-        try {
-            let tempAddresses=data.addresses;
-            // Remove ' ,' from lines like 'Address 1, , , , , City, Country' to 'Address 1, City, Country'
-            for(let index=0;index<tempAddresses.length;index++){
-                tempAddresses[index]=`${tempAddresses[index].replace(/\ \,/g,"")}, ${postCode.toLocaleUpperCase()}`;
-            }
-            this.setState({...this.state,addressOptions:tempAddresses});
-      } catch (error) {
-      }
+                try {
+                    
+                    let tempAddresses=data.addresses;
+                    // Remove ' ,' from lines like 'Address 1, , , , , City, Country' to 'Address 1, City, Country' and add Postcode
+                    for(let index=0;index<tempAddresses.length;index++){
+                        tempAddresses[index]=`${tempAddresses[index].replace(/\ \,/g,"")}, ${postCode.toLocaleUpperCase()}`;
+                    }
+                    this.setState({...this.state,addressOptions:tempAddresses,errorPostCode:""});
+                } catch (error) {
+                    this.setState({errorPostCode:"Invalid postcode"});
+                }
     }
     
-    removeBlanks = (addresses) =>{
-        for(let index=0;index<addresses.length;index++){
-            addresses[index]=addresses[index].replace(/\ \,/g,"")+this.state.postCode;
-        }
+    // removeBlanks = (addresses) =>{
+    //     for(let index=0;index<addresses.length;index++){
+    //         addresses[index]=addresses[index].replace(/\ \,/g,"")+this.state.postCode;
+    //     }
         
-        this.setState({...this.state,addressOptions:addresses});
-    }
+    //     this.setState({...this.state,addressOptions:addresses});
+    // }
 
     
-    handleClickShowPostCode = () => {
-        this.getAddressFromPostCode(this.state.personalData.postCode);
+    handleClickSearchPostCode = e =>{
+        if(this.state.personalData.postCode){
+            this.getAddressFromPostCode(this.state.personalData.postCode);
+        }else{
+            this.setState({errorPostCode:"Enter a post code2"});
+        }
     };
     
-    handleMouseDownPostCode = (event) => {
-        event.preventDefault();
+    handleMouseDownPostCode = e => {
+        e.preventDefault();
     };
 
     render(){
@@ -249,7 +256,7 @@ class PersonalDetails extends React.Component {
 
                     <FormGroup>
                         <FormControl style={styles.inputField}>
-                            <InputLabel htmlFor="standard-adornment-password">Enter Post Code</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-password">Enter Post Code and click search button</InputLabel>
                             <Input
                                 id="postCodeField"
                                 type="text"
@@ -260,7 +267,8 @@ class PersonalDetails extends React.Component {
                                         <IconButton 
                                             aria-label="search"                                                        
                                             onClick={this.handleClickShowPostCode}
-                                            onMouseDown={this.handleMouseDownPostCode}>
+                                            onMouseDown={this.handleClickSearchPostCode}
+                                            style={styles.searchButton}>
                                             <SearchIcon />
                                         </IconButton>
                                     </InputAdornment>
@@ -305,6 +313,10 @@ const styles={
     },
     errorText:{
         color:'#E51D5B'
+    },
+    searchButton:{
+        backgroundColor:'#E51D5B',
+        color:'white'
     }
 }
 

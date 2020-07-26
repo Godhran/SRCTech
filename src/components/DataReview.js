@@ -26,6 +26,7 @@ class DataReview extends React.Component {
                 <React.Fragment>
                     <AppNavBar pageTitle="Review Your Data"/>
                     <div className="formContainer">
+                    <div className="reviewDataForm">
                     <h3>Review your Data</h3>
                     <div>
                         <h2>Personal Details</h2>                    
@@ -76,8 +77,8 @@ class DataReview extends React.Component {
                     <h2>Work Experience</h2>
                     {values.workExperience.map((job, index) => {
                         return(
-                            <ListItem button>
-                                <ListItemText key={index} primary={`${job.startDate} - ${job.endDate}\n${job.role}\n${job.roleDescription}`}/>
+                            <ListItem key={`${index}jobButton`} button>
+                                <ListItemText key={`${index}job`} primary={`${job.startDate} - ${job.endDate}\n${job.role}\n${job.roleDescription}`}/>
                             </ListItem>
                         )
                     })}
@@ -88,13 +89,14 @@ class DataReview extends React.Component {
                     <List component="nav" aria-label="secondary mailbox folders">
                     {values.industries.map((industry, index) => {
                         return(
-                            <ListItem button>
-                                <ListItemText key={index} primary={industry}/>
+                            <ListItem key={`${index}industryButton`} button>
+                                <ListItemText key={`${index}industry`} primary={industry}/>
                             </ListItem>
                         )
                     })}
                     </List>
                     <Button variant="contained" color="secondary" onClick={this.goBack(1)}>Update</Button>
+                    </div>
                     </div>
                     <ButtonGroup className="pageControlButtons" disableElevation variant="contained" color="primary">
                         <Button onClick={this.goBack(1)}>Back</Button>

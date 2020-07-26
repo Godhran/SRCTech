@@ -1,28 +1,96 @@
 import React from "react";
-import { TextField, ButtonGroup, Button, FormGroup, MuiThemeProvider }  from "@material-ui/core";
+import { TextField, ButtonGroup, Button, FormGroup, MuiThemeProvider, Typography }  from "@material-ui/core";
 import AppNavBar from "./AppNavBar.js";
 
 class WorkExperienceAdd extends React.Component {
     state={
-        startDate:undefined,
-        endDate:undefined,
-        role:undefined,
-        roleDescription:undefined
+        startDate:"",
+        endDate:"",
+        role:"",
+        roleDescription:"",
+        errorStartDate:"",
+        errorEndDate:"",
+        errorRole:"",
+        errorRoleDescription:""
     }
     
     goNext = value => e =>{
         e.preventDefault()
-        this.props.pageManager(true,1);
+        if(this.validateData(this.state.personalData)){
+            this.props.manageUpdates("personalData",this.state.personalData);
+            this.props.pageManager(true,value);
+        }
     }
 
     goBack = value => e =>{
         e.preventDefault()
-        this.props.pageManager(false,1);
+        this.props.pageManager(false,value);
     }
 
     addWorkExperience = e =>{
         e.preventDefault()
-        this.props.addWorkExperience(this.state);
+        if(this.validateData(this.state)){
+            this.props.addWorkExperience(this.state);
+        }
+    }
+
+    sanitizeString(str){
+        if(str.length>0){
+            str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+            return str.trim();
+        }else{
+            return "";
+        }
+    }
+
+    validateData=(data)=>{
+        let allDataOk=true;
+
+        data.role = this.sanitizeString(data.role);
+        data.roleDescription = this.sanitizeString(data.roleDescription);
+
+        let tempErrorStartDate="";
+        let tempErrorEndDate="";
+        let tempErrorRole="";
+        let tempErrorRoleDescription="";
+
+        if(data.startDate.length>0){
+            tempErrorStartDate="";
+        }else{
+            tempErrorStartDate="Enter a start date";
+            allDataOk=false;
+        }
+
+        if(data.endDate.length>0){
+            tempErrorEndDate="";            
+        }else{
+            tempErrorEndDate="Enter an end date";            
+            allDataOk=false;
+        }
+        
+        if(data.role.length>0){
+            tempErrorRole="";            
+        }else{
+            tempErrorRole="Enter a role";            
+            allDataOk=false;
+        }       
+
+        if(data.roleDescription.length>0){
+            tempErrorRoleDescription="";            
+        }else{
+            tempErrorRoleDescription="Enter a role description";            
+            allDataOk=false;
+        }
+
+        this.setState({
+            ...this.state,
+            errorStartDate:tempErrorStartDate,
+            errorEndDate:tempErrorEndDate,
+            errorRole:tempErrorRole,
+            errorRoleDescription:tempErrorRoleDescription
+         });
+
+        return allDataOk;
     }
 
     handleChange = input => e =>{
@@ -58,6 +126,7 @@ class WorkExperienceAdd extends React.Component {
                 <React.Fragment>
                     <AppNavBar pageTitle="Add Work Experience"/>
                     <div className="formContainer">
+                    <h3>Add Work Experience</h3>
                     <FormGroup>
                         <TextField
                             id="startDate"
@@ -70,6 +139,7 @@ class WorkExperienceAdd extends React.Component {
                             shrink: true,
                             }}
                         />
+                        <Typography style={styles.errorText}>{this.state.errorStartDate}</Typography>
                     </FormGroup>
                     <FormGroup>
                         <TextField
@@ -83,6 +153,7 @@ class WorkExperienceAdd extends React.Component {
                             shrink: true,
                             }}
                         />
+                        <Typography style={styles.errorText}>{this.state.errorEndDate}</Typography>
                     </FormGroup>
 
                     <FormGroup>
@@ -91,6 +162,7 @@ class WorkExperienceAdd extends React.Component {
                             label="Role" 
                             onChange={this.updateTempData("role")}
                         />
+                        <Typography style={styles.errorText}>{this.state.errorRole}</Typography>
                     </FormGroup>
                     <FormGroup>
                         <TextField 
@@ -100,6 +172,7 @@ class WorkExperienceAdd extends React.Component {
                             multiline
                             rows={4}
                         />
+                        <Typography style={styles.errorText}>{this.state.errorRoleDescription}</Typography>
                     </FormGroup>
                     <ButtonGroup className="pageControlButtons" disableElevation variant="contained" color="primary">
                         {/* <Button onClick={this.updateWorkExperience(false)}>Cancel</Button> */}
@@ -112,4 +185,9 @@ class WorkExperienceAdd extends React.Component {
     }
 }
 
+const styles={
+    errorText:{
+        color:'#E51D5B'
+    }
+}
 export default WorkExperienceAdd

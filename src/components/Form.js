@@ -109,12 +109,12 @@ class Form extends React.Component {
                 values={values}            
                 />);
             case 1: return (
-            <PersonalDetails
-            pageManager={this.pageManager}
-            handleChange={this.handleChange}
-            manageUpdates={this.manageUpdates}
-            values={values}            
-            />)
+                <PersonalDetails
+                pageManager={this.pageManager}
+                handleChange={this.handleChange}
+                manageUpdates={this.manageUpdates}
+                values={values}            
+                />)
             case 2: return (
                 <PasswordEntry
                 pageManager={this.pageManager}

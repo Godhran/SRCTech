@@ -31,7 +31,7 @@ class Industries extends React.Component {
                     <AppNavBar pageTitle="Select Industries"/>
                     <div className="formContainer">
                     <h3>Industries</h3>
-                    <div>
+                    <div style={styles.industries}>
                     {this.industryList.map((entry, index) => {
                         return <Button variant="outlined" color={this.activateIndustry(entry)?"primary":"default"} key={index} onClick={this.toggleIndustry(entry)} style={styles.button}>{entry}</Button>
                     })}
@@ -54,6 +54,10 @@ const styles={
         fontFamily:"Oswald",
         textTransform:"capitalize",
         margin:'0.25em'
+    },
+    industries:{
+        width:'250px',
+        margin:'auto'
     }
 }
 

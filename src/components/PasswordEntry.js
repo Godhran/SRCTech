@@ -77,6 +77,7 @@ class PasswordEntry extends React.Component {
                 <React.Fragment>
                     <AppNavBar pageTitle="Password Details"/>
                     <div className="formContainer">
+                    <h3>Password</h3>
                     <FormGroup>
                         <FormControl>
                             <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
